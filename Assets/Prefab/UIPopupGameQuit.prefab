@@ -244,7 +244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1789943994663465859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bceb2074ed2bf4ba59c394d947b249d2, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 731f94279c4d56e4ca424e8aeaed6eb7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 01909783c51c84472ab24203664fa679, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbcc753afc41c86479200b9e2b9ee5f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6c6a98feab374194bbbbd81dd9854872, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 824b20ac68b67d54aa259d2647e95d73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e7806618f7c2c4a998fdef084226a403, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c8fc51ab3a1ee84f87b886ab0f954f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1479,7 +1479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1789943994663466069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1898,8 +1898,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bcb17c65841b94711891e652afee441c, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 048d469dada0dce4c8bdbd9564d427cb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
