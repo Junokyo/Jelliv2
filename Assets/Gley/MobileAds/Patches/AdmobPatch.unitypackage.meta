@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3cd0491e85b06f247a65a8fb65ff571d
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266331
+  packageName: Mobile Ads v2.0
+  packageVersion: 2.0.17
+  assetPath: Assets/Gley/MobileAds/Patches/AdmobPatch.unitypackage
+  uploadId: 748769

@@ -1,0 +1,386 @@
+﻿/*
+ * Created on 2024
+ *
+ * Copyright (c) 2025 Dotmob Studio
+ * Support : dotmobstudio@gmail.com
+ */
+using DG.Tweening;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using EasyUI.Toast;
+using Gley.MobileAds;
+using Gley.Localization;
+namespace Gley.EasyIAP.Internal
+{
+
+    public class PopupShopCoin : Popup
+    {
+
+
+        public class DM_StoreProducts
+        {
+            public ShopProductNames name;
+            public bool bought;
+
+            public DM_StoreProducts(ShopProductNames name, bool bought)
+            {
+                this.name = name;
+                this.bought = bought;
+            }
+        }
+
+
+        private bool purchaseInProgress;
+        private bool initializationInProgress;
+        private List<DM_StoreProducts> consumableProducts = new List<DM_StoreProducts>();
+
+        public static bool isNewUser;
+
+
+
+        public Button WatchAds;
+
+
+        public Text[] listPrice;
+
+        public Button RestoreButton;
+
+        public Image ImageBackBlocking;
+
+        private void Awake()
+        {
+            /// Debug.Log("INIT :" + IAPManager.Instance.IsInitialized());
+            if (!API.IsInitialized())
+            {
+                if (initializationInProgress == false)
+                {
+
+                    initializationInProgress = true;
+                    //Initialize IAP
+                    API.Initialize(InitializeResult);
+                }
+            }
+            else
+            {
+                GetListPrice();
+            }
+        }
+
+        public override void Start()
+        {
+            //if ((bool)ImageBackBlocking)
+            //{
+            //	ImageBackBlocking.gameObject.SetActive(value: true);
+            //	ImageBackBlocking.color = new Color(0f, 0f, 0f, 0f);
+            //	//ImageBackBlocking.DOFade(0.5f, 0.5f);
+            //}
+            base.Start();
+
+#if GLEY_IAP_IOS
+		RestoreButton.gameObject.SetActive(true);
+#else
+            RestoreButton.gameObject.SetActive(false);
+#endif
+
+
+
+
+        }
+
+        private void GetListPrice()
+        {
+           for(int i = 0; i <= listPrice.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        {
+                            listPrice[0].text = API.GetLocalizedPriceString(ShopProductNames.Coins1);
+                            break;
+                        }
+                    case 1:
+                        {
+                            listPrice[1].text = API.GetLocalizedPriceString(ShopProductNames.Coins2);
+                            break;
+                        }
+                    case 2:
+                        {
+                            listPrice[2].text = API.GetLocalizedPriceString(ShopProductNames.Coins3);
+                            break;
+                        }
+                    case 3:
+                        {
+                            listPrice[3].text = API.GetLocalizedPriceString(ShopProductNames.Coins4);
+                            break;
+                        }
+                    case 4:
+                        {
+                            listPrice[4].text = API.GetLocalizedPriceString(ShopProductNames.Coins5);
+                            break;
+                        }
+                    case 5:
+                        {
+                            listPrice[5].text = API.GetLocalizedPriceString(ShopProductNames.Removeads);
+                            break;
+                        }
+
+                }
+            }
+        }
+
+        private void InitializeResult(IAPOperationStatus status, string message, List<StoreProduct> shopProducts)
+        {
+            // Debug.Log("Chay vao day");
+            initializationInProgress = false;
+            consumableProducts = new List<DM_StoreProducts>();
+            if (status == IAPOperationStatus.Success)
+            {
+                GetListPrice();
+                //IAP was successfully initialized
+                //loop through all products and check which one are bought to update our variables
+                for (int i = 0; i < shopProducts.Count; i++)
+                {
+                    if (shopProducts[i].productName == "Coins1")
+                    {
+                        listPrice[0].text = EasyIAP.API.GetLocalizedPriceString(ShopProductNames.Coins1);
+                        //if a product is active, means that user had already bought that product so enable access
+                        if (shopProducts[i].active)
+                        {
+                            //unlockLevel1 = true;
+                        }
+                    }
+                    if (shopProducts[i].productName == "Coins2")
+                    {
+                        if (shopProducts[i].active)
+                        {
+                            //unlockLevel2 = true;
+                        }
+                    }
+                    if (shopProducts[i].productName == "Coins3")
+                    {
+                        //if a subscription is active means that the subscription is still valid so enable access
+                        if (shopProducts[i].active)
+                        {
+                            //subscription = true;
+                        }
+                    }
+                    if (shopProducts[i].productName == "Coins4")
+                    {
+                        //if a subscription is active means that the subscription is still valid so enable access
+                        if (shopProducts[i].active)
+                        {
+                            //subscription = true;
+                        }
+                    }
+                    if (shopProducts[i].productName == "Coins5")
+                    {
+                        //if a subscription is active means that the subscription is still valid so enable access
+                        if (shopProducts[i].active)
+                        {
+                            //subscription = true;
+                        }
+                    }
+
+                    //construct a different list of each category of products, for an easy display purpose, not required
+                    switch (shopProducts[i].productType)
+                    {
+                        case ProductType.Consumable:
+                            consumableProducts.Add(new DM_StoreProducts(IAPManager.Instance.ConvertNameToShopProduct(shopProducts[i].productName), shopProducts[i].active));
+                            break;
+
+                    }
+                }
+
+
+            }
+
+            if (IAPManager.Instance.debug)
+            {
+                Debug.Log("Init status: " + status + " message " + message);
+                //Debug.Log("List products: " + consumableProducts.Count);
+             
+            }
+        }
+
+        //#if GLEY_IAP_IOS
+
+        public void Restore()
+        {
+            Gley.EasyIAP.API.RestorePurchases(ProductRestoredCallback, RestoreDone);
+        }
+
+        private void ProductRestoredCallback(IAPOperationStatus status, string message, StoreProduct product)
+        {
+            if (status == IAPOperationStatus.Success)
+            {
+                Debug.Log("Restore product success!: " + message);
+            }
+            else
+            {
+                //an error occurred in the buy process, log the message for more details
+                Debug.Log("Restore product failed: " + message);
+            }
+        }
+
+        private void RestoreDone()
+        {
+            Debug.Log("Restore done");
+        }
+
+        //#endif
+
+
+        public void MakeBuyProduct(int indexProduct)
+        {
+
+            switch (indexProduct)
+            {
+                case 1:
+                    {
+                        API.BuyProduct(ShopProductNames.Coins1, ProductBought);
+                        break;
+                    }
+                case 2:
+                    {
+                        API.BuyProduct(ShopProductNames.Coins2, ProductBought);
+                        break;
+                    }
+                case 3:
+                    {
+                        API.BuyProduct(ShopProductNames.Coins3, ProductBought);
+                        break;
+                    }
+                case 4:
+                    {
+                      API.BuyProduct(ShopProductNames.Coins4, ProductBought);
+                        break;
+                    }
+                case 5:
+                    {
+                        API.BuyProduct(ShopProductNames.Coins5, ProductBought);
+                        break;
+                    }
+                case 6:
+                    {
+                        API.BuyProduct(ShopProductNames.Removeads, ProductBought);
+                        break;
+                    }
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// automatically called after one product is bought
+        /// </summary>
+        /// <param name="status">The purchase status: Success/Failed</param>
+        /// <param name="message">Error message if status is failed</param>
+        /// <param name="product">the product that was bought, use the values from shop product to update your game data</param>
+        private void ProductBought(IAPOperationStatus status, string message, StoreProduct product)
+        {
+            purchaseInProgress = false;
+            if (status == IAPOperationStatus.Success)
+            {
+                if (IAPManager.Instance.debug)
+                {
+                    Debug.Log("Buy product completed: " + product.localizedTitle + " receive value: " + product.value);
+                    ScreenWriter.Write("Buy product completed: " + product.localizedTitle + " receive value: " + product.value);
+                }
+
+                //each consumable gives coins in this example
+                if (product.productType == ProductType.Consumable)
+                {
+
+                    //coins += product.value;
+                    base.OnEventClose();
+                    MonoSingleton<PlayerDataManager>.Instance.IncreaseCoin(product.value);
+                    SoundSFX.Play(SFXIndex.DailyBonusGet);
+                    MonoSingleton<UIOverlayEffectManager>.Instance.ShowEffectRibbonFireworks();
+
+                    Toast.Show("Successful purchase " + product.value + " coins!", 3f, ToastColor.Green, ToastPosition.MiddleCenter);
+
+                }
+
+                else if (product.productType == ProductType.NonConsumable)
+                {
+                    //TODO: remove ads
+                    MobileAds.API.RemoveAds(true);
+                    Toast.Show("Successful remove ads !", 3f, ToastColor.Green, ToastPosition.MiddleCenter);
+                }
+
+
+
+            }
+            else
+            {
+                //en error occurred in the buy process, log the message for more details
+                if (IAPManager.Instance.debug)
+                {
+                    Debug.Log("Buy product failed: " + message);
+                    ScreenWriter.Write("Buy product failed: " + message);
+                }
+            }
+        }
+
+
+
+        public void OnClickWatchAds()
+        {
+            //TODO : Reward ads
+            //if (Advertisements.Instance.IsRewardVideoAvailable())
+            //{
+            //    Advertisements.Instance.ShowRewardedVideo(CompleteMethod);
+            //}
+
+            if (MobileAds.API.IsRewardedVideoAvailable())
+            {
+                MobileAds.API.ShowRewardedVideo(CompleteMethod);
+            }
+
+        }
+
+
+        private void CompleteMethod(bool completed)
+        {
+            if (completed == true)
+            {
+                //Debug.Log("Chay vao say");
+                //MonoSingleton<PlayerDataManager>.Instance.IncreaseCoin(10);
+                base.OnEventClose();
+                PopupRewardCoins popupRewardCoins = MonoSingleton<PopupManager>.Instance.Open(PopupType.PopupRewardCoins, enableBackCloseButton: true) as PopupRewardCoins;
+            }
+            else
+            {
+                Debug.Log("No Reward");
+            }
+        }
+
+
+        public override void OnEventClose()
+        {
+            base.OnEventClose();
+            UIManager.holdOnUpdateCoin = false;
+            MonoSingleton<UIManager>.Instance.SetCoinCurrencyMenuLayer(isPopupOverLayer: false);
+            if (MonoSingleton<PopupManager>.Instance.CurrentPopupType == PopupType.PopupInGameItemStore || (MonoSingleton<SceneControlManager>.Instance.CurrentSceneType == SceneType.Game && (MonoSingleton<PopupManager>.Instance.CurrentPopupType == PopupType.PopupGameOver || MonoSingleton<PopupManager>.Instance.CurrentPopupType == PopupType.PopupGameOverCollectInfo)))
+            {
+                MonoSingleton<UIManager>.Instance.SetCoinCurrencyMenuLayer(isPopupOverLayer: true);
+            }
+            else if (MonoSingleton<SceneControlManager>.Instance.CurrentSceneType == SceneType.Game)
+            {
+                MonoSingleton<UIManager>.Instance.HideCoinCurrentMenuLayer();
+            }
+            //if (purchaseReachedStep != AppEventManager.PurchaseReachedStep.Purchased)
+            //{
+            //    SendAppEventPurchaseFunnel(MonoSingleton<PlayerDataManager>.Instance.Coin, purchaseReachedStep);
+            //}
+            PeriodEventData.CheckAndOpenPopup();
+        }
+
+        private void OnDestroy()
+        {
+        }
+    }
+}
