@@ -4,17 +4,18 @@
  * Copyright (c) 2024 dotmobstudio
  * Support : dotmobstudio@gmail.com
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_ANDROID || UNITY_IOS
 using Firebase.Extensions;
 using Firebase;
+#endif
 
 public class FirebaseAnalyticsManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_ANDROID || UNITY_IOS
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             var dependencyStatus = task.Result;
@@ -34,8 +35,8 @@ public class FirebaseAnalyticsManager : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
-
+#else
+        Debug.Log("Firebase is only supported on Android and iOS");
+#endif
     }
-
-
 }
