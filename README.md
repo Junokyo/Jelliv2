@@ -1,6 +1,9 @@
-# Jellivo Saga
+# Jellivo
 
 A Match-3 Puzzle Game built with Unity 6.0
+
+**Developer**: JC Media
+**Package**: com.JCMedia.Jellivo
 
 ![Unity](https://img.shields.io/badge/Unity-6.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-Android-green)
@@ -93,8 +96,7 @@ See [project.md](project.md) for detailed documentation in Vietnamese.
 
 ## Developer
 
-**Dotmob Studio**
-- Email: dotmobstudio@gmail.com
+**JC Media**
 
 ---
 

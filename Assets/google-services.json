@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "597015289511",
-    "project_id": "jelly-blast-e6f89",
-    "storage_bucket": "jelly-blast-e6f89.firebasestorage.app"
+    "project_number": "672157362646",
+    "project_id": "jellivosaga",
+    "storage_bucket": "jellivosaga.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:597015289511:android:c25e86ec6a04cf97c64582",
+        "mobilesdk_app_id": "1:672157362646:android:06e8a8606cec2b30021c77",
         "android_client_info": {
-          "package_name": "com.DotmobStudio.JellyBlast"
+          "package_name": "com.JCMedia.Jellivo"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDDRkq5Sq7bRnMQMZlKM84_V6vXn9B0fLU"
+          "current_key": "AIzaSyDqAYzEZYv-hfUZHWA5dT9gVlPyyY1QmE4"
         }
       ],
       "services": {

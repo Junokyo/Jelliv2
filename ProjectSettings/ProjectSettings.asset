@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 0
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Dotmob Studio
-  productName: Jelly Blast
+  companyName: JC Media
+  productName: Jellivo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -166,9 +166,9 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.DotmobStudio.JellyBlast
-    Standalone: com.Dotmob.JewelHunter
-    iPhone: com.Dotmob.Juice-Pop-Mania
+    Android: com.JCMedia.Jellivo
+    Standalone: com.JCMedia.Jellivo
+    iPhone: com.JCMedia.Jellivo
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -193,7 +193,7 @@ PlayerSettings:
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
   iOSSimulatorArchitecture: 0
-  iOSTargetOSVersionString: 13.0
+  iOSTargetOSVersionString: 15.0
   tvOSSdkVersion: 0
   tvOSSimulatorArchitecture: 0
   tvOSRequireExtendedGameController: 0
@@ -558,6 +558,9 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 01000000
+  - serializedVersion: 3
+    m_BuildTarget: iOS
+    m_Formats: 03000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -825,12 +828,10 @@ PlayerSettings:
   webWasm2023: 0
   scriptingDefineSymbols:
     Android: ENABLE_ANTI_CHEAT;GLEY_IAP_GOOGLEPLAY;GLEY_DAILY_REWARDS;GLEY_LOCALIZATION;GLEY_ADMOB;GLEY_PATCH_ADMOB
-    Standalone: 
+    Standalone: ENABLE_ANTI_CHEAT;GLEY_IAP_GOOGLEPLAY;GLEY_DAILY_REWARDS;GLEY_LOCALIZATION;GLEY_ADMOB;GLEY_PATCH_ADMOB
     Windows Store Apps: 
-    iPhone: ENABLE_ANTI_CHEAT
-  additionalCompilerArguments:
-    Standalone:
-    - ENABLE_ANTI_CHEAT
+    iPhone: ENABLE_ANTI_CHEAT;GLEY_IAP_IOS;GLEY_DAILY_REWARDS;GLEY_LOCALIZATION;GLEY_ADMOB;GLEY_PATCH_ADMOB
+  additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
@@ -957,7 +958,7 @@ PlayerSettings:
   cloudProjectId: b01112cc-4537-44e6-b8d9-f600e0c7e1df
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Jewel Hunter
+  projectName: Jellivo
   organizationId: kenhaui
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 1

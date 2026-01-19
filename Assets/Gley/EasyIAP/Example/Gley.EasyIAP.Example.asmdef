@@ -1,0 +1,16 @@
+{
+    "name": "Gley.EasyIAP.Example",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "GLEY_EXAMPLE_DISABLED"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

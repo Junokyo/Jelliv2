@@ -1,10 +1,12 @@
 # Jelly Blast - Project Documentation
 
 ## Thông tin dự án
-- **Tên game**: Jelly Blast (Match-3 Puzzle Game)
+- **Tên game**: Jellivo (Match-3 Puzzle Game)
 - **Engine**: Unity 6.0 (6000.0.58f2)
-- **Platform**: Android
-- **Developer**: Dotmob Studio
+- **Platform**: Android / iOS
+- **Developer**: JC Media
+- **Package ID**: com.JCMedia.Jellivo
+- **Firebase Project**: jellivosaga
 - **Repository**: https://github.com/Junokyo/Jellivo (Private)
 
 ---

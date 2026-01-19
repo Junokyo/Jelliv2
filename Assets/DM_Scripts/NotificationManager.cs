@@ -6,8 +6,10 @@
  */
 using UnityEngine;
 using OneSignalSDK;
+#if UNITY_ANDROID
 using Unity.Notifications.Android;
 using UnityEngine.Android;
+#endif
 
 public class NotificationManager : MonoBehaviour
 {
@@ -22,11 +24,15 @@ public class NotificationManager : MonoBehaviour
 
     public void RequestAuthorization()
     {
+#if UNITY_ANDROID
         Debug.Log("RequestUserPermission : " + Permission.HasUserAuthorizedPermission("android.permission.POST_NOTIFICATIONS"));
         if (!Permission.HasUserAuthorizedPermission("android.permission.POST_NOTIFICATIONS"))
         {
             Permission.RequestUserPermission("android.permission.POST_NOTIFICATIONS");
         }
-
+#elif UNITY_IOS
+        // iOS uses OneSignal for notifications
+        Debug.Log("iOS: Using OneSignal for notifications");
+#endif
     }
 }
